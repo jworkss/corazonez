@@ -1,4 +1,4 @@
-// Arreglo de datos del patrón del corazón
+// patrón del corazón
 const patronCorazon = [
   "          $$$$$$$$$$               $$$$$$$$$$$",
   "      $$$$$$$$$$$$$$$$$          $$$$$$$$$$$$$$$$$",
@@ -32,7 +32,7 @@ const contenedorCorazon = document.getElementById("contenedorCorazon");
 const mensajeFinal = document.getElementById("mensajeFinal");
 const etiquetaNombreAmor = document.querySelector(".lover-name");
 
-// Variables p5.js/Lógica Global
+// Variables
 let nombreActual = "";
 let estaAnimando = false;
 let lineasCorazonGeneradas = [];
@@ -40,8 +40,6 @@ let lineasReveladas = 0;
 let ultimoTiempoRevelacion = 0;
 const INTERVALO_REVELACION_MIN = 100;
 const INTERVALO_REVELACION_MAX = 300;
-
-// --- Clase Línea de Matriz: HEXADECIMAL ---
 
 class LineaMatriz {
   constructor() {
@@ -81,7 +79,7 @@ class LineaMatriz {
   }
 }
 
-// --- Clase Corazón Flotante: EMOJI ---
+// orazón Flotante
 
 class CorazonFlotante {
   constructor() {
@@ -122,7 +120,6 @@ class CorazonFlotante {
 let lineasMatriz = [];
 let corazonesFlotantes = [];
 
-// --- Función de Configuración de p5.js (setup) ---
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("contenedor-canvas-p5");
@@ -137,11 +134,10 @@ function setup() {
   configurarEscuchadores();
 }
 
-// --- Función de Dibujo de p5.js (draw) ---
 function draw() {
   clear();
 
-  // 1. Actualizar y Mostrar Efecto Matriz
+  //  Actualizar y Mostrar Efecto
   if (frameCount % 40 === 0) {
     lineasMatriz.push(new LineaMatriz());
     if (lineasMatriz.length > 20) {
@@ -153,7 +149,7 @@ function draw() {
     linea.mostrar();
   }
 
-  // 2. Actualizar y Mostrar Corazones Flotantes
+  // Actualizar y Mostrar
   if (frameCount % 60 === 0) {
     corazonesFlotantes.push(new CorazonFlotante());
     if (corazonesFlotantes.length > 15) {
@@ -166,7 +162,7 @@ function draw() {
   }
 }
 
-// --- Funciones de Utilidad ---
+// Funciones de Utilidad
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -195,7 +191,7 @@ function configurarEscuchadores() {
   actualizarEstadoBoton();
 }
 
-// --- Funciones de Lógica Principal ---
+// Funciones de Lógica Principal
 
 function crearLineasCorazon(nombre) {
   const letras = nombre.split("");

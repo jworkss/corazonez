@@ -13,7 +13,7 @@ body {
   position: relative;
 }
 
-/* Contenedor Canvas p5.js */
+/* Contenedor Canva */
 #contenedor-canvas-p5 {
   position: fixed;
   top: 0;
@@ -78,7 +78,7 @@ body {
   }
 }
 
-/* Seccion Entrada */
+/*  Entrada */
 .input-section {
   max-width: 500px;
   width: 100%;
