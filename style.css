@@ -1,8 +1,305 @@
-html, body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-canvas {
+body {
+  font-family: "Fira Code", monospace;
+  background: #000;
+  color: #00ffcc;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Contenedor Canvas p5.js */
+#contenedor-canvas-p5 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#contenedor-canvas-p5 canvas {
   display: block;
+}
+
+/* Contenedor Terminal */
+.terminal-container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(
+      to right,
+      rgba(0, 255, 204, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 255, 204, 0.02) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Header */
+.terminal-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.terminal-title {
+  font-size: 14px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #00ccff;
+  text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(0, 204, 255, 0.8),
+      0 0 30px rgba(0, 204, 255, 0.3);
+  }
+}
+
+/* Seccion Entrada */
+.input-section {
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.terminal-input {
+  background: transparent;
+  border: 2px solid #00ffcc;
+  border-radius: 0;
+  padding: 15px 20px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+}
+
+.terminal-input:focus {
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+  border-color: #00ccff;
+}
+
+.terminal-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Botones */
+.terminal-button {
+  background: rgba(0, 255, 204, 0.1);
+  border: 2px solid #00ffcc;
+  padding: 15px 30px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.terminal-button:hover {
+  background: rgba(0, 255, 204, 0.2);
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.5);
+  transform: translateY(-2px);
+}
+
+.terminal-button:active {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+.terminal-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  background: rgba(0, 255, 204, 0.05);
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Cursor */
+.cursor-blink {
+  animation: blink 1s infinite;
+  font-weight: 400;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Texto de Carga */
+.loading-text {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #00ffcc;
+}
+
+/* Seccion Corazón */
+.heart-section {
+  max-width: 800px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  padding-left: 10px;
+  padding-top: 0;
+}
+
+.heart-container {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  margin: 5px 0;
+  min-height: 400px;
+  color: #00ffcc;
+  text-align: left;
+}
+
+.heart-line-terminal {
+  opacity: 0;
+  animation: terminalReveal 0.3s ease-out forwards;
+  margin: 0;
+  white-space: pre;
+  font-size: 16px;
+  font-family: "JetBrains Mono", monospace;
+  color: #00ffcc;
+  line-height: 1;
+  letter-spacing: 0px;
+}
+
+@keyframes terminalReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+.final-message {
+  margin-top: 5px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  font-weight: bold;
+  animation: terminalReveal 1s ease-out 0.5s forwards;
+  opacity: 0;
+  color: #ffffff;
+}
+
+.te-amo-text {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.lover-name {
+  color: #00ccff;
+  font-weight: bold;
+}
+
+/* Creditos */
+.credits {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-family: "Fira Code", sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 1000;
+}
+
+.credits a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.credits a:hover {
+  color: #00ffcc;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2rem;
+  }
+  .heart-container {
+    font-size: 13px;
+    line-height: 1;
+    overflow-x: auto;
+  }
+  .heart-line-terminal {
+    font-size: 13px !important;
+    line-height: 1 !important;
+    letter-spacing: 0px !important;
+  }
+  .terminal-input {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heart-container {
+    font-size: 11px;
+  }
+  .heart-line-terminal {
+    font-size: 11px !important;
+  }
+  .main-title {
+    font-size: 1.5rem;
+  }
 }

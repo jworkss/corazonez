@@ -1,0 +1,23 @@
+{
+  "nombre": "generador-corazon-unm-p5js",
+  "version": "2.0.0",
+  "descripcion": "Generador de Corazones P5.js - Proyecto de Jay, Universidad Nacional de Moreno. Estilo CIAN.",
+  "principal": "index.html",
+  "palabras_clave": [
+    "love",
+    "terminal",
+    "heart",
+    "romantic",
+    "p5js",
+    "unm",
+    "amor",
+    "terminal",
+    "corazon",
+    "romantico",
+    "p5js",
+    "unm",
+    "hacker"
+  ],
+  "autor": "Jay - Universidad Nacional de Moreno",
+  "licencia": "FREE"
+}
